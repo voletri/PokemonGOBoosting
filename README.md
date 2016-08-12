@@ -1,1 +1,1 @@
-# PokemonGO
+# Pokemon GO Boosting
