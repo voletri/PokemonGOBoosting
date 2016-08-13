@@ -145,6 +145,10 @@ $app->error(function (\Exception $exp, $code) use ($app) {
         return;
     }
     switch ($code) {
+        case 401:{
+            $error ='Unauthorized';
+            break;
+        }
         case 403: {
             $error = 'Access forbidden';
             break;
@@ -165,7 +169,7 @@ $app->error(function (\Exception $exp, $code) use ($app) {
 });
 
 $app->get('/', function()use($app){
-    return 'Hello World';
+    return $app->render('main.twig');
 })->bind('index');
 
 $app->run();
