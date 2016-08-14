@@ -5,8 +5,6 @@ use App\DataBaseService\DatabaseServiceProvider;
 use App\MailingService\MailingServiceProvider;
 
 use App\Entities\Email\EmailDirector;
-
-
 use App\Entities\Order\OrderDirector;
 
 
@@ -62,10 +60,10 @@ $app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/../layouts',
-    'twig.options' => array(
+    'twig.options' => ($app['debug']?null:array(
         'cache' => __DIR__ . '/../cache',
         'debug' => $app['debug']
-    )
+    ))
 ));
 
 $app->register(new SessionServiceProvider(), array(
