@@ -170,4 +170,111 @@ $app->get('/', function()use($app){
     return $app->render('main.twig');
 })->bind('index');
 
+$app->post('/contact', function (Request $request) use ($app) {
+
+    $name = $request->get('name');
+    $email = $request->get('email');
+    $messageContent = $request->get('message');
+
+    $message = array('name' => $name, 'email' => $email, 'message' => $messageContent);
+
+    $messageConstraints = new Assert\Collection(array(
+        'name' => array(
+            new Assert\NotBlank(array(
+                'message' => 'Name cannot be blank.'
+            )),
+            new Assert\NotNull(array(
+                'message' => 'Unable to obtain your name.'
+            )),
+            new Assert\Length(array(
+                'min' => 3,
+                'max' => 50,
+                'minMessage' => 'Given name must be at least {{ limit }} characters long.',
+                'maxMessage' => 'Given name cannot be longer than {{ limit }} characters.'
+            ))
+        ),
+        'email' => array(
+            new Assert\NotBlank(array(
+                'message' => 'Email cannot be blank.'
+            )),
+            new Assert\NotNull(array(
+                'message' => 'Unable to obtain your email.'
+            )),
+            new Assert\Email(array(
+                'message' => 'The email {{ value }} is not a valid email.', 'checkMX' => true
+            ))
+        ),
+        'message' => array(
+            new Assert\NotBlank(array(
+                'message' => 'Message cannot be blank.'
+            )),
+            new Assert\NotNull(array(
+                'message' => 'Unable to obtain your message.'
+            )),
+            new Assert\Length(array(
+                'min' => 5,
+                'max' => 1000,
+                'minMessage' => 'Message must be at least {{ limit }} characters long.',
+                'maxMessage' => 'Message cannot be longer than {{ limit }} characters.'
+            ))
+        )
+    ));
+
+    $validationErrors = $app->validator->validate($message, $messageConstraints);
+
+    if (count($validationErrors) > 0) {
+        $errorsMessages = array();
+        foreach ($validationErrors as $validationError) {
+            array_push($errorsMessages, $validationError->getMessage() . "\n");
+        }
+        $response = array(
+            'status' => 'error',
+            'msg' => $errorsMessages
+        );
+        return $app->json($response);
+    }
+
+    $title = "Message no. " . date("YmdHis");
+
+    //Mail to Customer Service with Question
+    $mailToCustomerService = EmailDirector::newInstance(new QuestionEmailBuilder())->createEmail(
+        $title
+        , array($email=>$email),
+        array('contact@sboost.eu' => 'SBoost Customer Service'),
+        array(
+            '#name#' => $name,
+            '#customerMessage#' => $messageContent
+        )
+    );
+
+    //Mail to Customer with Question
+    $mailToCustomer = EmailDirector::newInstance(new QuestionEmailBuilder())->createEmail(
+        $title,
+        array('contact@sboost.eu' => 'S Boost Customer Service'),
+        array($email=>$email),
+        array(
+            '#name#' => $name,
+            '#customerMessage#' => $messageContent
+        )
+    );
+    if(!$app->sendMail($mailToCustomerService)){
+        $response = array(
+            'status' => 'critical_error',
+            'msg' => array(
+                'We were unable to receive your message. Try again later.'
+            )
+        );
+        return $app->json($response);
+    }
+    $app->sendMail($mailToCustomer);
+    $response = array(
+        'status' => 'successful',
+        'msg' => array(
+            'Thank you for contact.'
+        )
+    );
+    return $app->json($response);
+})->bind('contact');
+
+
 $app->run();
