@@ -39,6 +39,8 @@
     <script src="js/sweetalert-dev.js"></script>
     <!--JavaScript for custom popups-->
     <script type="text/javascript" src="js/pokemongo.js"></script>
+
+    <script type="text/javascript" src="js/PokemonGoForm.js"></script> <!--JavaScript for Order Form-->
     <!--JavaScript for Cookies Policy-->
     <script type="text/javascript">
         window.cookieconsent_options = {
@@ -235,33 +237,32 @@
             <div class="col-md-7 no-padding col-md-offset-5 pricings text-center">
                 <div class="pricing" id="per_win_boost">
                     <div id="rankBoostBoxMain" class="box-main active" data-img="img/Pokeball.jpg">
-                        <h3 id="rankBoostBoxMainH3" class="h3">Rank Boost</h3>
+                        <h3 id="rankBoostBoxMainH3" class="h3">Account lvl boost</h3>
                         <img id="rankBoostImage" class="rankpngbig" src="img/ranks/17.png"
                              alt="Rank Boost Service"/>
                     </div>
                     <div id="rankBoostBoxSecond" class="box-second active container">
-                        <form action="" method="post">
+                        <form action="" method="post"> <!--Form 1 pokemon-->
                             <div class="row">
                                 <div class="col-md-4">
                                     <img id="start-rank-image" class="rank-image" src="img/ranks/0.png"
                                          alt="Start Rank"/>
-                                    <h5 class="h5 bold">Select your current rank:</h5>
-                                    <select name="start-rank" id="start-rank-boost-select"
-                                            onchange="startRankChanged()" class="form-control-static">
-                                    </select>
+                                    <h5 class="h5 bold">Select your current lvl</h5>
+                                    <input name="desired-rank" type="text" id="amount-start" class="h3" readonly
+                                           style="border:0; color:#f6931f; font-weight:bold; width: 15%">
+                                    <div id="slider-range-start"></div>
                                 </div>
                                 <div class="col-md-4">
                                     <img id="desired-rank-image" class="rank-image" src="img/ranks/0.png"
                                          alt="Desired Rank"/>
-                                    <h5 class="h5 bold">Select your desired rank:</h5>
-                                    <select name="desired-rank" id="desired-rank-boost-select"
-                                            onchange="desiredRankChanged()" class="form-control-static">
-                                    </select><br/>
-                                    <input name="duo-with-booster-checkbox" type="checkbox" id="duo-rank-boost-checkbox"
-                                           onchange="duoRankBoostCheckBoxChanged()"> <label class="h4 light"
-                                                                                            for="duo-rank-boost-checkbox">Duo/lobby
-                                        with
-                                        booster</label>
+                                    <h5 class="h5 bold">Select your desired lvl:</h5>
+                                    <label for="amount"><h4 class="h4"></h4></label>
+                                    <input name="desired-rank" type="text" id="amount-end" class="h3" readonly
+                                           style="border:0; color:#f6931f; font-weight:bold; width: 15%">
+
+                                    <div id="slider-range-end"></div>
+                                    <br/>
+
                                 </div>
                                 <div class="col-md-4">
                                     <h3 id="fake-price-rank-boost-h3"
@@ -288,25 +289,20 @@
                                 <div class="col-md-4">
                                     <img id="current-rank-image" class="rank-image" src="img/ranks/0.png"
                                          alt="Current Rank"/>
-                                    <h5 class="h5 bold">Select your current rank:</h5>
-                                    <select name="start-rank" id="current-per-win-select"
-                                            onchange="currentRankChanged()" class="form-control-static">
-                                    </select>
+                                    <label for="amount-pokemon"><h4 class="h4"></h4></label>
+                                    </br>
+                                    <input name="desired-rank" type="text" id="amount-pokemon" class="h3" readonly
+                                           style="border:0; color:#f6931f; font-weight:bold; width: 15%">
+                                    </br>
+                                    <div id="slider-range-pokemon"></div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="per-win-slider-container">
-                                        <label for="amount"><h4 class="h4">Number of wins: </h4></label>
-                                        <input name="desired-rank" type="text" id="amount" class="h3" readonly
-                                               style="border:0; color:#f6931f; font-weight:bold; width: 15%">
-                                        <div id="slider-range-min"></div>
-                                        <input name="duo-with-booster-checkbox" type="checkbox"
-                                               onchange="duoPerWinCheckBoxChanged()" id="duo-per-win-checkbox"> <label
-                                                class=" h4 light" for="duo-per-win-checkbox">Duo/lobby
-                                            with booster</label>
+                                        <label for="amount"><h4 class="h4"></h4></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h2 id="total-price-per-win-h2" class="h2 light per-win-price">€3</h2>
+                                    <h2 id="total-price-per-pokemon-h2" class="h2 light per-win-price">€4</h2>
                                     <input type="image" class="pay-pal-button-per-win"
                                            id="pay-with-pay-pal-button-per-win" name="submit"
                                            src="img/paypalbutton.png"/></br>

@@ -188,28 +188,7 @@ function duoPerWinCheckBoxChanged() {
         totalPricePerWinH2.innerHTML = "€" + Math.round(perWinPrice * amount.value);
     }
 }
-//CODE FOR SLIDER
-$(function () {
-    var sliderRangeMin = $('#slider-range-min');
-    var amount = $('#amount');
-    sliderRangeMin.slider({
-        range: 'min',
-        value: 1,
-        min: 1,
-        max: 10,
-        slide: function (event, ui) {
-            amount.val(ui.value);
 
-            currentRank = $('#current-per-win-select').prop('selectedIndex');
-            perWinPrice = perWinPrices[currentRank] * ui.value;
-            if ($('#duo-per-win-checkbox').is(':checked')) {
-                perWinPrice = perWinPrice * 1.5;
-            }
-            $('#total-price-per-win-h2').text("€" + Math.round(perWinPrice));
-        }
-    });
-    amount.val(sliderRangeMin.slider('value'));
-});
 //endregion
 function centerModal() {
     $(this).css('display', 'block');
