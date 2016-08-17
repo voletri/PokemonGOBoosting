@@ -1,28 +1,3 @@
-/**
- * Created by Klinek on 16.08.2016.
- */
-//CODE FOR SLIDER
-$(function () {
-    var sliderRangeMin = $('#slider-range-min');
-    var amount = $('#amount');
-    sliderRangeMin.slider({
-        range: 'min',
-        value: 10,
-        min: 10,
-        max: 10,
-        slide: function (event, ui) {
-            amount.val(ui.value);
-
-            currentRank = $('#current-per-win-select').prop('selectedIndex');
-            perWinPrice = perWinPrices[currentRank] * ui.value;
-            if ($('#duo-per-win-checkbox').is(':checked')) {
-                perWinPrice = perWinPrice * 1.5;
-            }
-            $('#total-price-per-win-h2').text("€" + Math.round(perWinPrice));
-        }
-    });
-    amount.val(sliderRangeMin.slider('value'));
-});
 
 /**
  * Created by Klinek on 16.08.2016.
@@ -31,6 +6,7 @@ $(function () {
 $(function () {
     var sliderRangeMin = $('#slider-range-start');
     var amount = $('#amount-start');
+    var pic = $('#start-rank-image');
     sliderRangeMin.slider({
         range: 'min',
         value: 1,
@@ -38,7 +14,18 @@ $(function () {
         max: 24,
         step: 1,
         slide: function (event, ui) {
-            amount.val(ui.value);
+            amount.val(ui.value)
+
+            switch (true){
+                case (ui.value >= 10 && ui.value <20):
+                    pic.css('content','url(img/Ivysaur.png')
+                    break;
+                case (ui.value >= 20):
+                    pic.css('content','url(img/Venusaur.png')
+                    break;
+                default:
+                    pic.css('content','url(img/BulbasaurReal.png')
+            }
         }
     });
     amount.val(sliderRangeMin.slider('value'));
@@ -47,6 +34,7 @@ $(function () {
 $(function () {
     var sliderRangeMin = $('#slider-range-end');
     var amount = $('#amount-end');
+    var picEnd = $('#desired-rank-image');
     sliderRangeMin.slider({
         range: 'min',
         value: 2,
@@ -55,6 +43,19 @@ $(function () {
         step: 1,
         slide: function (event, ui) {
             amount.val(ui.value);
+
+            switch (true){
+                case (ui.value >= 10 && ui.value <20):
+                    picEnd.css('content','url(img/Charmeleon.png');
+                    break;
+                case (ui.value >= 20):
+                    picEnd.css('content','url(img/Charizard.png)');
+                    break;
+                default:
+                    picEnd.css('content','url(img/CharmanderReal.png)');
+            }
+
+
         }
     });
     amount.val(sliderRangeMin.slider('value'));

@@ -93,13 +93,13 @@ jQuery(function ($) {
         $('.pricing .box-second').removeClass('active');
         $('.pricing .box-second').contents().hide();
         $('.box-main .h3').addClass('white');
-        $('.box-main .rankpngbig').css("content", "url(img/ranks/0.png");
+        $('.box-main .rankpngbig').css("content", "url(img/AccountBoost.jpg");
         $('.box-main .perwinpngbig').css("content", "url(img/perwinboostimage.png");
         $(this).addClass('active');
         $(this).next($('.box-second')).addClass('active');
         $(this).next($('.box-second')).contents().show();
         $(this).find('h3').removeClass('white');
-        $(this).find('img').css("content", "url(img/ranks/17.png");
+        $(this).find('img').css("content", "url(img/AccountBoost.jpg");
         $(this).find('.perwinpngbig').css("content", "url(img/perwinboostactiveimage.png");
         $('#boost').css("background-image", "url(" + $(this).data('img') + ")");
         $('#boost').css("background-size", "cover");
@@ -131,7 +131,7 @@ jQuery(function ($) {
         var rankBoostBoxMainH3 = $('#rankBoostBoxMainH3');
 
         perWinBoostImage.css('content','url(img/perWinBoostImage.png)');
-        rankBoostImage.css('content','url(img/ranks/17.png)');
+        rankBoostImage.css('content','url(img/AccountBoost.jpg)');
 
         perWinBoostBoxMain.removeClass('active');
         perWinBoostBoxSecond.removeClass('active');
@@ -158,7 +158,7 @@ jQuery(function ($) {
         var rankBoostBoxMainH3 = $('#rankBoostBoxMainH3');
 
         perWinBoostImage.css('content','url(img/perWinBoostActiveImage.png)');
-        rankBoostImage.css('content','url(img/ranks/0.png)');
+        rankBoostImage.css('content','url(img/AccountBoost.jpg)');
 
         perWinBoostBoxMain.addClass('active');
         perWinBoostBoxSecond.addClass('active');
@@ -185,7 +185,7 @@ jQuery(function ($) {
             var rankBoostBoxMainH3 = $('#rankBoostBoxMainH3');
 
             perWinBoostImage.css('content','url(img/perWinBoostImage.png)');
-            rankBoostImage.css('content','url(img/ranks/17.png)');
+            rankBoostImage.css('content','url(img/AccountBoost.jpg.png)');
 
             perWinBoostBoxMain.removeClass('active');
             perWinBoostBoxSecond.removeClass('active');
